@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Judicial Sketch to 3D</title>
+  <meta name="description" content="Sign in to your Judicial Sketch to 3D account">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1f2937" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="/favicon.ico">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#3b82f6',
+              foreground: '#ffffff',
+            },
+            secondary: {
+              DEFAULT: '#f3f4f6',
+              foreground: '#1f2937',
+            },
+            destructive: {
+              DEFAULT: '#ef4444',
+              foreground: '#ffffff',
+            },
+            muted: {
+              DEFAULT: '#f3f4f6',
+              foreground: '#6b7280',
+            },
+            accent: {
+              DEFAULT: '#f3f4f6',
+              foreground: '#1f2937',
+            },
+            background: '#ffffff',
+            foreground: '#1f2937',
+          },
+        }
+      }
+    }
+  </script>
+  
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    /* Dark mode styles */
+    .dark {
+      --background: #1f2937;
+      --foreground: #f9fafb;
+      --primary: #3b82f6;
+      --primary-foreground: #1f2937;
+      --secondary: #374151;
+      --secondary-foreground: #f9fafb;
+      --muted: #374151;
+      --muted-foreground: #d1d5db;
+      --accent: #374151;
+      --accent-foreground: #f9fafb;
+      --destructive: #b91c1c;
+      --destructive-foreground: #f9fafb;
+      --border: #374151;
+      --input: #374151;
+      --ring: #3b82f6;
+    }
+    
+    .dark body {
+      background-color: var(--background);
+      color: var(--foreground);
+    }
+    
+    /* High contrast mode */
+    .high-contrast {
+      --background: #ffffff;
+      --foreground: #000000;
+      --primary: #0000ff;
+      --primary-foreground: #ffffff;
+      --secondary: #e6e6e6;
+      --secondary-foreground: #000000;
+      --muted: #d9d9d9;
+      --muted-foreground: #000000;
+      --accent: #e6e6e6;
+      --accent-foreground: #000000;
+      --destructive: #ff0000;
+      --destructive-foreground: #ffffff;
+      --border: #000000;
+      --input: #000000;
+      --ring: #0000ff;
+    }
+    
+    .dark.high-contrast {
+      --background: #000000;
+      --foreground: #ffffff;
+      --primary: #3c9cff;
+      --primary-foreground: #000000;
+      --secondary: #262626;
+      --secondary-foreground: #ffffff;
+      --muted: #262626;
+      --muted-foreground: #cccccc;
+      --accent: #262626;
+      --accent-foreground: #ffffff;
+      --destructive: #ff3c3c;
+      --destructive-foreground: #000000;
+      --border: #ffffff;
+      --input: #ffffff;
+      --ring: #3c9cff;
+    }
+    
+    /* Animation classes */
+    .animate-fadeIn {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    
+    .animate-slideUp {
+      animation: slideUp 0.5s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Form styles */
+    .form-input {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.375rem;
+      background-color: #fff;
+      color: #1f2937;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .dark .form-input {
+      background-color: #374151;
+      border-color: #4b5563;
+      color: #f9fafb;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      line-height: 1.25rem;
+      color: #4b5563;
+      margin-bottom: 0.5rem;
+    }
+
+    .dark .form-label {
+      color: #d1d5db;
+    }
+
+    .form-error {
+      font-size: 0.75rem;
+      color: #ef4444;
+      margin-top: 0.25rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.375rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: #3b82f6;
+      color: #ffffff;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary:hover {
+      background-color: #2563eb;
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid #d1d5db;
+      color: #4b5563;
+    }
+
+    .dark .btn-outline {
+      border-color: #4b5563;
+      color: #d1d5db;
+    }
+
+    .btn-outline:hover {
+      background-color: #f3f4f6;
+    }
+
+    .dark .btn-outline:hover {
+      background-color: #374151;
+    }
+  </style>
+  
+  <!-- Prevent flash of incorrect theme -->
+  <script>
+    (function() {
+      try {
+        const storedTheme = localStorage.getItem('theme')
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        const theme = storedTheme || systemTheme
+        
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark')
+        }
+        
+        // Apply high contrast if enabled - ensure this runs early
+        if (localStorage.getItem('highContrast') === 'true') {
+          document.documentElement.classList.add('high-contrast')
+        }
+        
+        // Apply language settings
+        const lang = localStorage.getItem('language') || 'en'
+        document.documentElement.lang = lang
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'
+        
+        // Apply font size if set
+        const fontSize = localStorage.getItem('fontSize')
+        if (fontSize) {
+          document.documentElement.style.fontSize = `${fontSize}px`
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    })()
+  </script>
+</head>
+<body class="bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 min-h-screen">
+  <div class="min-h-screen flex flex-col">
+    <div class="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8">
+      <div class="w-full max-w-md bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden animate-fadeIn">
+        <div class="p-6 sm:p-8">
+          <div class="mb-8">
+            <a href="index.html" class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 19-7-7 7-7"></path>
+                <path d="M19 12H5"></path>
+              </svg>
+              Back to Home
+            </a>
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Welcome back</h1>
+            <p class="text-gray-600 dark:text-gray-400 mt-2">Sign in to your account to continue</p>
+          </div>
+
+          <div class="animate-slideUp">
+            <form id="login-form" class="space-y-6">
+              <div>
+                <label for="email" class="form-label">Email</label>
+                <div class="relative">
+                  <input 
+                    id="email" 
+                    name="email" 
+                    type="email" 
+                    autocomplete="email" 
+                    placeholder="your.email@example.com" 
+                    required 
+                    class="form-input"
+                  />
+                </div>
+                <div id="email-error" class="form-error hidden"></div>
+              </div>
+
+              <div>
+                <label for="password" class="form-label">Password</label>
+                <div class="relative">
+                  <input 
+                    id="password" 
+                    name="password" 
+                    type="password" 
+                    autocomplete="current-password" 
+                    placeholder="••••••••" 
+                    required 
+                    class="form-input pr-10"
+                  />
+                  <button 
+                    type="button" 
+                    id="toggle-password" 
+                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+                    aria-label="Show password"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </button>
+                </div>
+                <div id="password-error" class="form-error hidden"></div>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <input 
+                    type="checkbox" 
+                    id="remember-me" 
+                    name="remember-me" 
+                    class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  />
+                  <label for="remember-me" class="text-sm font-medium text-gray-600 dark:text-gray-400">
+                    Remember me
+                  </label>
+                </div>
+                <a href="#" class="text-sm font-medium text-blue-600 hover:text-blue-500">
+                  Forgot password?
+                </a>
+              </div>
+
+              <button 
+                type="submit" 
+                class="btn btn-primary w-full py-2 text-base"
+                id="login-button"
+              >
+                Sign in
+              </button>
+
+              <div class="text-center mt-6">
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  Don't have an account?
+                  <a href="signup.html" class="font-medium text-blue-600 hover:text-blue-500 ml-1">
+                    Sign up
+                  </a>
+                </p>
+              </div>
+            </form>
+          </div>
+
+          <div class="relative mt-8">
+            <div class="absolute inset-0 flex items-center">
+              <div class="w-full border-t border-gray-200 dark:border-gray-700"></div>
+            </div>
+            <div class="relative flex justify-center text-xs uppercase">
+              <span class="bg-white dark:bg-gray-900 px-2 text-gray-500 dark:text-gray-400">
+                Or continue with
+              </span>
+            </div>
+          </div>
+
+          <div class="mt-6 grid grid-cols-2 gap-4">
+            <button class="btn btn-outline">
+              <svg class="mr-2 h-4 w-4" aria-hidden="true" viewBox="0 0 24 24">
+                <path
+                  d="M12.0003 4.75C13.7703 4.75 15.3553 5.36002 16.6053 6.54998L20.0303 3.125C17.9502 1.19 15.2353 0 12.0003 0C7.31028 0 3.25527 2.69 1.28027 6.60998L5.27028 9.70498C6.21525 6.86002 8.87028 4.75 12.0003 4.75Z"
+                  fill="#EA4335"
+                />
+                <path
+                  d="M23.49 12.275C23.49 11.49 23.415 10.73 23.3 10H12V14.51H18.47C18.18 15.99 17.34 17.25 16.08 18.1L19.945 21.1C22.2 19.01 23.49 15.92 23.49 12.275Z"
+                  fill="#4285F4"
+                />
+                <path
+                  d="M5.26498 14.2949C5.02498 13.5699 4.88501 12.7999 4.88501 11.9999C4.88501 11.1999 5.01998 10.4299 5.26498 9.7049L1.275 6.60986C0.46 8.22986 0 10.0599 0 11.9999C0 13.9399 0.46 15.7699 1.28 17.3899L5.26498 14.2949Z"
+                  fill="#FBBC05"
+                />
+                <path
+                  d="M12.0004 24.0001C15.2404 24.0001 17.9654 22.935 19.9454 21.095L16.0804 18.095C15.0054 18.82 13.6204 19.245 12.0004 19.245C8.8704 19.245 6.21537 17.135 5.2654 14.29L1.27539 17.385C3.25539 21.31 7.3104 24.0001 12.0004 24.0001Z"
+                  fill="#34A853"
+                />
+              </svg>
+              Google
+            </button>
+            <button class="btn btn-outline">
+              <svg class="mr-2 h-4 w-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482C17.139 18.9 20 14.555 20 10.017 20 4.484 15.522 0 10 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              GitHub
+            </button>
+          </div>
+
+          <div class="mt-8">
+            <div class="flex items-center justify-center">
+              <div class="flex items-center space-x-2">
+                <button
+                  type="button"
+                  class="text-sm text-gray-500 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md"
+                  aria-label="Switch to English"
+                  data-lang="en"
+                >
+                  English
+                </button>
+                <span class="text-gray-300 dark:text-gray-600">|</span>
+                <button
+                  type="button"
+                  class="text-sm text-gray-500 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md"
+                  aria-label="Switch to Arabic"
+                  data-lang="ar"
+                >
+                  العربية
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Theme toggle button -->
+    <div class="fixed bottom-4 right-4 flex space-x-2">
+      <button id="theme-toggle" class="p-2 rounded-full bg-white dark:bg-gray-800 shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" id="theme-toggle-dark-icon" class="hidden h-5 w-5 text-gray-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" id="theme-toggle-light-icon" class="hidden h-5 w-5 text-yellow-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="m4.93 4.93 1.41 1.41"></path>
+          <path d="m17.66 17.66 1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="m6.34 17.66-1.41 1.41"></path>
+          <path d="m19.07 4.93-1.41 1.41"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Theme toggle functionality
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+    // Change the icons inside the button based on previous settings
+    if (localStorage.getItem('theme') === 'dark' || 
+        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      themeToggleLightIcon.classList.remove('hidden');
+    } else {
+      themeToggleDarkIcon.classList.remove('hidden');
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+      // Toggle icons
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      
+      // If set via local storage previously
+      if (localStorage.getItem('theme')) {
+        if (localStorage.getItem('theme') === 'light') {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        }
+      } else {
+        if (document.documentElement.classList.contains('dark')) {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        } else {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        }
+      }
+    });
+
+    // Password visibility toggle
+    const togglePasswordBtn = document.getElementById('toggle-password');
+    const passwordInput = document.getElementById('password');
+
+    togglePasswordBtn.addEventListener('click', function() {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      
+      // Change the icon
+      if (type === 'text') {
+        this.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+          <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+          <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+          <line x1="2" x2="22" y1="2" y2="22"></line>
+          </svg>
+        `;
+        this.setAttribute('aria-label', 'Hide password');
+      } else {
+        this.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        `;
+        this.setAttribute('aria-label', 'Show password');
+      }
+    });
+
+    // Form validation
+    const loginForm = document.getElementById('login-form');
+    const emailInput = document.getElementById('email');
+    const emailError = document.getElementById('email-error');
+    const passwordError = document.getElementById('password-error');
+    const loginButton = document.getElementById('login-button');
+
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      let isValid = true;
+
+      // Reset errors
+      emailError.textContent = '';
+      emailError.classList.add('hidden');
+      passwordError.textContent = '';
+      passwordError.classList.add('hidden');
+
+      // Validate email
+      if (!emailInput.value) {
+        emailError.textContent = 'Email is required';
+        emailError.classList.remove('hidden');
+        isValid = false;
+      } else if (!/^\S+@\S+\.\S+$/.test(emailInput.value)) {
+        emailError.textContent = 'Please enter a valid email address';
+        emailError.classList.remove('hidden');
+        isValid = false;
+      }
+
+      // Validate password
+      if (!passwordInput.value) {
+        passwordError.textContent = 'Password is required';
+        passwordError.classList.remove('hidden');
+        isValid = false;
+      } else if (passwordInput.value.length < 8) {
+        passwordError.textContent = 'Password must be at least 8 characters';
+        passwordError.classList.remove('hidden');
+        isValid = false;
+      }
+
+      if (isValid) {
+        // Show loading state
+        loginButton.disabled = true;
+        loginButton.textContent = 'Signing in...';
+
+        // Simulate API call
+        setTimeout(() => {
+          // Redirect to home page
+          window.location.href = 'index.html';
+        }, 1500);
+      }
+    });
+
+    // Language switching
+    const languageButtons = document.querySelectorAll('[data-lang]');
+
+    // Check if a language is already set
+    const currentLang = localStorage.getItem('language') || 'en';
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+
+    // Apply high contrast if enabled
+    if (localStorage.getItem('highContrast') === 'true') {
+      document.documentElement.classList.add('high-contrast');
+    }
+
+    // Apply font size if set
+    const storedFontSize = localStorage.getItem('fontSize');
+    if (storedFontSize) {
+      document.documentElement.style.fontSize = `${storedFontSize}px`;
+    }
+
+    languageButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const lang = this.getAttribute('data-lang');
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        localStorage.setItem('language', lang);
+        
+        // Apply RTL adjustments
+        applyRtlAdjustments();
+        
+        // Force a page reload to apply language changes fully
+        window.location.reload();
+      });
+    });
+    
+    // Apply RTL adjustments when language changes
+    function applyRtlAdjustments() {
+      const isRtl = document.documentElement.dir === 'rtl';
+      console.log('Applying RTL adjustments, isRtl:', isRtl);
+      
+      // Handle margin adjustments
+      if (isRtl) {
+        // Convert mr-X to ml-X
+        document.querySelectorAll('[class*="mr-"]').forEach(el => {
+          const classes = el.className.split(' ');
+          classes.forEach(cls => {
+            if (cls.startsWith('mr-')) {
+              const value = cls.substring(3);
+              el.classList.remove(cls);
+              el.classList.add(`ml-${value}`);
+            }
+          });
+        });
+      } else {
+        // Convert ml-X to mr-X
+        document.querySelectorAll('[class*="ml-"]').forEach(el => {
+          const classes = el.className.split(' ');
+          classes.forEach(cls => {
+            if (cls.startsWith('ml-')) {
+              const value = cls.substring(3);
+              el.classList.remove(cls);
+              el.classList.add(`mr-${value}`);
+            }
+          });
+        });
+      }
+    }
+    
+    // Apply RTL adjustments on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      applyRtlAdjustments();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Team - Judicial Sketch to 3D</title>
+  <meta name="description" content="Meet the talented team behind Judicial Sketch to 3D">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1f2937" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="images/favicon.ico">
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Three.js for 3D elements -->
+  <script src="js/three.min.js"></script>
+</head>
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+  <div id="particles-container" class="fixed inset-0 pointer-events-none"></div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur dark:bg-gray-900/95 dark:border-gray-800">
+    <div class="container mx-auto flex h-16 items-center px-4">
+      <div class="mr-4 flex">
+        <a href="index.html" class="flex items-center space-x-2">
+          <!-- Logo -->
+          <div class="flex items-center gap-2">
+            <div class="relative rounded-lg overflow-hidden bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center" style="width: 32px; height: 32px;">
+              <div class="absolute inset-0 bg-gradient-to-tr from-blue-500/30 to-indigo-600/30"></div>
+              <div class="relative z-10 flex items-center justify-center">
+                <div class="absolute">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="19.2" height="19.2" viewBox="0 0 24 24" fill="none" stroke="rgba(255, 255, 255, 0.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 6h18"></path>
+                    <path d="M6 12h12"></path>
+                    <path d="M9 18h6"></path>
+                  </svg>
+                </div>
+                <div class="absolute -rotate-45 translate-x-1 translate-y-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12.8" height="12.8" viewBox="0 0 24 24" fill="none" stroke="rgba(255, 255, 255, 0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22v-9"></path>
+                    <path d="M5 10V6a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v4"></path>
+                    <path d="M5 14h14"></path>
+                    <path d="M5 18h14"></path>
+                    <path d="M9 22h6"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="absolute bottom-0 left-0 w-full h-1/4 bg-black/10"></div>
+              <div class="absolute top-0 right-0 w-1/4 h-full bg-white/10"></div>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-bold leading-tight text-base">
+                <span class="text-gray-900 dark:text-white">Judicial</span>
+                <span class="text-blue-600">3D</span>
+              </span>
+              <span class="text-gray-500 dark:text-gray-400 leading-tight text-xs">Sketch to Reality</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <nav class="flex flex-1 items-center justify-end space-x-4">
+        <a href="index.html" class="text-sm font-medium transition-colors hover:text-blue-600">
+          Home
+        </a>
+        <a href="project-details.html" class="text-sm font-medium transition-colors hover:text-blue-600">
+          Project Details
+        </a>
+        <a href="index.html#try-it" class="text-sm font-medium transition-colors hover:text-blue-600">
+          Try It
+        </a>
+        <a href="team.html" class="text-sm font-medium text-blue-600 border-b-2 border-blue-600 pb-1">
+          Our Team
+        </a>
+        <a href="index.html#tutorial" class="text-sm font-medium transition-colors hover:text-blue-600">
+          Tutorial
+        </a>
+        <a href="login.html" class="text-sm font-medium transition-colors hover:text-blue-600">
+          Login
+        </a>
+        <a href="signup.html" class="text-sm font-medium transition-colors hover:text-blue-600">
+          Sign Up
+        </a>
+        <div class="flex items-center space-x-1">
+          <!-- Language Switcher -->
+          <div class="relative">
+            <button id="language-button" class="h-8 w-8 px-0 rounded-md text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                <path d="M2 12h20"></path>
+              </svg>
+              <span class="sr-only">Switch language</span>
+            </button>
+            <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-48 rounded-md bg-white shadow-lg dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-50">
+              <div class="py-1">
+                <button class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 w-full text-left" data-lang="en">
+                  <span class="mr-2">English</span>
+                  <span class="text-xs text-gray-500">EN</span>
+                </button>
+                <button class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 w-full text-left" data-lang="ar">
+                  <span class="mr-2">العربية</span>
+                  <span class="text-xs text-gray-500">AR</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Accessibility Menu -->
+          <div class="relative">
+            <button id="accessibility-button" class="h-8 w-8 px-0 rounded-md text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="16" cy="4" r="1"></circle>
+                <path d="m18 19-5-7 1-9"></path>
+                <path d="M5 8a3 3 0 1 0 6 0 3 3 0 1 0-6 0"></path>
+                <path d="M10 19a2 2 0 1 0 4 0 2 2 0 1 0-4 0"></path>
+              </svg>
+              <span class="sr-only">Accessibility options</span>
+            </button>
+            <div id="accessibility-dropdown" class="hidden absolute right-0 mt-2 w-56 rounded-md bg-white shadow-lg dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-50">
+              <div class="py-1">
+                <div class="px-4 py-2 text-sm font-medium text-gray-900 dark:text-gray-100">Accessibility</div>
+                <div class="border-t border-gray-200 dark:border-gray-700"></div>
+                
+                <button id="light-mode-button" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2"></path>
+                    <path d="M12 20v2"></path>
+                    <path d="m4.93 4.93 1.41 1.41"></path>
+                    <path d="m17.66 17.66 1.41 1.41"></path>
+                    <path d="M2 12h2"></path>
+                    <path d="M20 12h2"></path>
+                    <path d="m6.34 17.66-1.41 1.41"></path>
+                    <path d="m19.07 4.93-1.41 1.41"></path>
+                  </svg>
+                  <span>Light Mode</span>
+                </button>
+                
+                <button id="dark-mode-button" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                  </svg>
+                  <span>Dark Mode</span>
+                </button>
+                
+                <button id="high-contrast-button" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                  <span class="mr-2">🔳</span>
+                  <span id="high-contrast-text">Enable High Contrast</span>
+                </button>
+                
+                <div class="border-t border-gray-200 dark:border-gray-700 my-1"></div>
+                
+                <button id="increase-font-button" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                    <path d="M11 8v6"></path>
+                    <path d="M8 11h6"></path>
+                  </svg>
+                  <span>Increase Font Size</span>
+                </button>
+                
+                <button id="decrease-font-button" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                    <path d="M8 11h6"></path>
+                  </svg>
+                  <span>Decrease Font Size</span>
+                </button>
+                
+                <button id="reset-font-button" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                  <span class="mr-2">↩️</span>
+                  <span>Reset Font Size</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="min-h-screen">
+    <!-- Hero Section with 3D Animation -->
+    <section class="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900/20 dark:via-indigo-900/20 dark:to-purple-900/20 overflow-hidden">
+      <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-[10%] left-[5%] w-64 h-64 bg-blue-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+        <div class="absolute top-[20%] right-[10%] w-72 h-72 bg-purple-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[10%] left-[35%] w-80 h-80 bg-indigo-400/10 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+      </div>
+      
+      <div class="relative max-w-7xl mx-auto">
+        <div class="flex flex-col lg:flex-row items-center justify-between">
+          <div class="text-center lg:text-left lg:w-1/2 mb-10 lg:mb-0">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fadeIn">
+              <span class="gradient-text">Meet Our Amazing Team</span>
+            </h1>
+            <p class="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto lg:mx-0 mb-10 animate-slideUp">
+              The talented individuals behind Judicial Sketch-to-3D who are revolutionizing the way sketches are transformed into realistic 3D models.
+            </p>
+            <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+              <button id="show-team-animation" class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition-colors interactive-element">
+                See Our Process
+              </button>
+              <button id="toggle-3d-view" class="px-6 py-3 bg-indigo-600 text-white rounded-lg shadow-lg hover:bg-indigo-700 transition-colors interactive-element">
+                Toggle 3D View
+              </button>
+            </div>
+          </div>
+          
+          <div class="lg:w-1/2 sketch-to-3d transform-3d">
+            <div class="sketch transform-3d-child">
+              <img src="images/team/sketch-example.jpg" alt="Judicial sketch" class="w-full h-auto rounded-lg shadow-xl sketch-effect">
+            </div>
+            <div class="model-3d transform-3d-child">
+              <div id="hero-3d-model" class="model-container bg-gray-200 dark:bg-gray-800 rounded-lg shadow-xl"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Process Visualization -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-16 text-gray-900 dark:text-white">
+          <span class="relative inline-block">
+            <span class="absolute inset-x-0 bottom-0 h-2 bg-blue-200 dark:bg-blue-800"></span>
+            <span class="relative">Our Process</span>
+          </span>
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow-lg transform-3d interactive-element">
+            <div class="transform-3d-child">
+              <div class="mb-4 flex justify-center">
+                <div class="w-20 h-20 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center text-blue-600 dark:text-blue-400 animate-pulse-slow">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m3 21 9-9"></path>
+                    <path d="m13 13 9-9"></path>
+                    <path d="M21 13V4h-9"></path>
+                    <path d="M21 3h-9"></path>
+                    <path d="M3 4v17"></path>
+                    <path d="M4 4h7"></path>
+                    <path d="M4 11h2"></path>
+                  </svg>
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-center mb-2 text-gray-900 dark:text-white">Sketch Creation</h3>
+              <p class="text-gray-600 dark:text-gray-400 text-center">Our team creates detailed judicial sketches with precision and accuracy.</p>
+              <div class="mt-6 sketch-to-3d">
+                <div class="sketch">
+                  <img src="images/process/sketch-creation.jpg" alt="Sketch process" class="w-full h-auto rounded-lg">
+                </div>
+                <div class="model-3d">
+                  <img src="images/process/digital-sketch.jpg" alt="Digital sketch" class="w-full h-auto rounded-lg">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow-lg transform-3d interactive-element">
+            <div class="transform-3d-child">
+              <div class="mb-4 flex justify-center">
+                <div class="w-20 h-20 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center text-indigo-600 dark:text-indigo-400 animate-pulse-slow">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                    <circle cx="9" cy="9" r="2"></circle>
+                    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+                  </svg>
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-center mb-2 text-gray-900 dark:text-white">AI Processing</h3>
+              <p class="text-gray-600 dark:text-gray-400 text-center">Our advanced AI transforms sketches into photorealistic images.</p>
+              <div class="mt-6 sketch-to-3d">
+                <div class="sketch">
+                  <img src="images/process/ai-processing.jpg" alt="AI processing" class="w-full h-auto rounded-lg">
+                </div>
+                <div class="model-3d">
+                  <img src="images/process/ai-result.jpg" alt="AI result" class="w-full h-auto rounded-lg">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow-lg transform-3d interactive-element">
+            <div class="transform-3d-child">
+              <div class="mb-4 flex justify-center">
+                <div class="w-20 h-20 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center text-purple-600 dark:text-purple-400 animate-pulse-slow">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.29 7 12 12 20.71 7"></polyline>
+                    <line x1="12" x2="12" y1="22" y2="12"></line>
+                  </svg>
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-center mb-2 text-gray-900 dark:text-white">3D Modeling</h3>
+              <p class="text-gray-600 dark:text-gray-400 text-center">We convert 2D images into detailed, interactive 3D models.</p>
+              <div class="mt-6 sketch-to-3d">
+                <div class="sketch">
+                  <img src="images/process/3d-modeling.jpg" alt="3D modeling" class="w-full h-auto rounded-lg">
+                </div>
+                <div class="model-3d">
+                  <img src="images/process/3d-model.jpg" alt="3D model" class="w-full h-auto rounded-lg">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Interactive 3D Model Demo -->
+        <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl shadow-lg mb-16">
+          <h3 class="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-white">Interactive 3D Model Demo</h3>
+          <div id="interactive-3d-model" class="model-container h-[400px] bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+          <div class="mt-4 flex justify-center gap-4">
+            <button id="rotate-model" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition-colors">
+              Rotate Model
+            </button>
+            <button id="zoom-model" class="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition-colors">
+              Zoom In/Out
+            </button>
+            <button id="change-model" class="px-4 py-2 bg-purple-600 text-white rounded-lg shadow hover:bg-purple-700 transition-colors">
+              Change Model
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Supervisor Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-16 text-gray-900 dark:text-white">
+          <span class="relative inline-block">
+            <span class="absolute inset-x-0 bottom-0 h-2 bg-blue-200 dark:bg-blue-800"></span>
+            <span class="relative">Project Supervisor</span>
+          </span>
+        </h2>
+        
+        <div class="flex justify-center">
+          <div class="w-full max-w-md bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden team-card hover:shadow-2xl transform transition-all duration-300">
+            <div class="relative">
+              <div class="h-48 bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
+                <img src="images/team/supervisor.jpg" alt="Mohammed Shreif Elkasass" class="h-32 w-32 rounded-full object-cover border-4 border-white shadow-lg">
+              </div>
+              <div class="absolute top-0 right-0 m-4 bg-white dark:bg-gray-700 rounded-full p-2 shadow-md pulse">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 20h9"></path>
+                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="p-6 text-center">
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Mohammed Shreif Elkasass</h3>
+              <p class="text-blue-600 dark:text-blue-400 font-medium mb-4">Project Supervisor</p>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">
+                Guiding the team with expertise in computer vision and 3D modeling technologies, ensuring the project meets the highest standards of quality and innovation.
+              </p>
+              <div class="flex justify-center space-x-4 social-icons">
+                <a href="#" class="text-muted-foreground hover:text-primary transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                  </svg>
+                </a>
+                <a href="#" class="text-muted-foreground hover:text-primary transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </a>
+                <a href="#" class="text-muted-foreground hover:text-primary transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1
+.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Members Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-950">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-16 text-gray-900 dark:text-white">
+          <span class="relative inline-block">
+            <span class="absolute inset-x-0 bottom-0 h-2 bg-blue-200 dark:bg-blue-800"></span>
+            <span class="relative">Team Members</span>
+          </span>
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Team Member 1 -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden team-card">
+            <div class="h-48 bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
+              <img src="images/team/member1.jpg" alt="Momen Tarek" class="h-32 w-32 rounded-full object-cover border-4 border-white shadow-lg">
+            </div>
+            <div class="p-6 text-center">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Momen Tarek</h3>
+              <p class="text-blue-600 dark:text-blue-400 font-medium mb-4">Team Leader & Web Designer</p>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">
+                Leading the team and designing the web interface to ensure a seamless user experience.
+              </p>
+              <div class="flex justify-center space-x-4 social-icons">
+                <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                  </svg>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Team Member 2 -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden team-card">
+            <div class="h-48 bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
+              <img src="images/team/member2.jpg" alt="Yousef Saad" class="h-32 w-32 rounded-full object-cover border-4 border-white shadow-lg">
+            </div>
+            <div class="p-6 text-center">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Yousef Saad</h3>
+              <p class="text-blue-600 dark:text-blue-400 font-medium mb-4">Desktop Designer</p>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">
+                Creating intuitive desktop interfaces that enhance user productivity and experience.
+              </p>
+              <div class="flex justify-center space-x-4 social-icons">
+                <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                  </svg>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Team Member 3 -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden team-card">
+            <div class="h-48 bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
+              <img src="images/team/member3.jpg" alt="Ezzat Yehia" class="h-32 w-32 rounded-full object-cover border-4 border-white shadow-lg">
+            </div>
+            <div class="p-6 text-center">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Ezzat Yehia</h3>
+              <p class="text-blue-600 dark:text-blue-400 font-medium mb-4">Dataset Sketch Engineer</p>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">
+                Managing and optimizing sketch datasets to improve AI model training and accuracy.
+              </p>
+              <div class="flex justify-center space-x-4 social-icons">
+                <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                  </svg>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Team Member 4 -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden team-card">
+            <div class="h-48 bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
+              <img src="images/team/member4.jpg" alt="Momena Asem" class="h-32 w-32 rounded-full object-cover border-4 border-white shadow-lg">
+            </div>
+            <div class="p-6 text-center">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Momena Asem</h3>
+              <p class="text-blue-600 dark:text-blue-400 font-medium mb-4">Model Sketch Engineer</p>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">
+                Developing advanced algorithms for sketch recognition and processing.
+              </p>
+              <div class="flex justify-center space-x-4 social-icons">
+                <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                  </svg>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Team Member 5 -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden team-card">
+            <div class="h-48 bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
+              <img src="images/team/member5.jpg" alt="Habeba Abdelbakey" class="h-32 w-32 rounded-full object-cover border-4 border-white shadow-lg">
+            </div>
+            <div class="p-6 text-center">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Habeba Abdelbakey</h3>
+              <p class="text-blue-600 dark:text-blue-400 font-medium mb-4">Dataset 3D Engineer</p>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">
+                Curating and managing 3D model datasets to enhance the AI's learning capabilities.
+              </p>
+              <div class="flex justify-center space-x-4 social-icons">
+                <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                  </svg>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-blue-600 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Team Member 6 -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden team-card">
+            <div class="h-48 bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
+              <img src="images/team/member6.jpg" alt="Esraa Akel" class="h-32 w-32 rounded-full object-cover border-4 border-white shadow-lg">
+            </div>
+            <div class="p-6 text-center">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Esraa Akel</h3>
+              <p class="text-blue-600 dark:text-blue-400 font-medium mb-4">Model 3D Engineer</p>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">
+                Specializing in creating high-quality 3D models from 2D images with exceptional detail.
+              </p>
+              <div class="flex justify-center space
